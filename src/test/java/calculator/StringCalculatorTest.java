@@ -56,7 +56,7 @@ public class StringCalculatorTest {
     @Test
     void 잘못된_형식_입력시_예외를_발생시킨다() {
         StringCalculator calculator = new StringCalculator();
-        assertThatThrownBy(() -> calculator.calculate("1, a, 3"))
+        assertThatThrownBy(() -> calculator.calculate("1,a,3"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("숫자 형식이 올바르지 않습니다");
     }
