@@ -4,12 +4,14 @@ public class StringCalculator {
 
     private final InputValidator validator;
     private final NumberConverter numberConverter;
+    private final DelimiterExtractor delimiterExtractor;
     private final StringSplitter stringSplitter;
     private final Calculator calculator;
 
     public StringCalculator() {
         this.validator = new InputValidator();
         this.numberConverter = new NumberConverter();
+        this.delimiterExtractor = new DelimiterExtractor();
         this.stringSplitter = new StringSplitter();
         this.calculator = new Calculator();
     }
@@ -19,16 +21,24 @@ public class StringCalculator {
             return 0L;
         }
 
-        if (!input.contains(",") && !input.contains(":")) {
-            long number = numberConverter.convert(input);
-            validator.validateNumber(number);
-            return calculator.sum(new long[]{number});
-        }
-
-        String[] numberStrings = stringSplitter.split(input);
+        String[] numberStrings = splitInput(input);
         long[] numbers = convertToNumbers(numberStrings);
         validateNumbers(numbers);
         return calculator.sum(numbers);
+    }
+
+    private String[] splitInput(String input) {
+        if (delimiterExtractor.hasCustomDelimiter(input)) {
+            String delimiter = delimiterExtractor.extractCustomDelimiter(input);
+            String numbersStrings = delimiterExtractor.extractNumbers(input);
+            return stringSplitter.split(numbersStrings, delimiter);
+        }
+
+        if (!input.contains(",") && !input.contains(":")) {
+            return new String[]{input};
+        }
+
+        return stringSplitter.split(input);
     }
 
     private long[] convertToNumbers(String[] numberStrings) {
