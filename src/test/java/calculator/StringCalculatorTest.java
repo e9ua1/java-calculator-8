@@ -52,4 +52,12 @@ public class StringCalculatorTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("음수는 허용되지 않습니다");
     }
+
+    @Test
+    void 잘못된_형식_입력시_예외를_발생시킨다() {
+        StringCalculator calculator = new StringCalculator();
+        assertThatThrownBy(() -> calculator.calculate("1, a, 3"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("숫자 형식이 올바르지 않습니다");
+    }
 }
