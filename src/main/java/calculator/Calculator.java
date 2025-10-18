@@ -3,9 +3,10 @@ package calculator;
 public class Calculator {
 
     public long sum(long[] numbers) {
-        if (numbers.length == 0) {
-            return 0L;
+        long total = 0L;
+        for (long number : numbers) {
+            total += number;
         }
-        return 0L;
+        return total;
     }
 }
