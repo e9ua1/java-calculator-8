@@ -11,4 +11,11 @@ public class InputValidatorTest {
         boolean result = validator.isValid(null);
         assertThat(result).isFalse();
     }
+
+    @Test
+    void 빈_문자열은_유효하다() {
+        InputValidator validator = new InputValidator();
+        boolean result = validator.isValid("");
+        assertThat(result).isTrue();
+    }
 }
