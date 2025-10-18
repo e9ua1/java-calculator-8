@@ -18,4 +18,11 @@ public class StringCalculatorTest {
         StringCalculator calculator = new StringCalculator();
         assertThat(calculator.calculate("1")).isEqualTo(1L);
     }
+
+    @Test
+    void 쉼표_구분자로_두_개_이상의_숫자를_더한다() {
+        StringCalculator calculator = new StringCalculator();
+        assertThat(calculator.calculate("1,2")).isEqualTo(3L);
+        assertThat(calculator.calculate("1,2,3")).isEqualTo(6L);
+    }
 }
