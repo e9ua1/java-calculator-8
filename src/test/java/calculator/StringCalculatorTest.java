@@ -3,6 +3,7 @@ package calculator;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class StringCalculatorTest {
 
@@ -42,5 +43,13 @@ public class StringCalculatorTest {
     void 커스텀_구분자를_사용한다() {
         StringCalculator calculator = new StringCalculator();
         assertThat(calculator.calculate("//;\n1;2;3")).isEqualTo(6L);
+    }
+
+    @Test
+    void 음수_입력시_예외를_발생시킨다() {
+        StringCalculator calculator = new StringCalculator();
+        assertThatThrownBy(() -> calculator.calculate("-1,2,3"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("음수는 허용되지 않습니다");
     }
 }
