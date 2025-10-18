@@ -6,6 +6,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class InputValidatorTest {
+
     @Test
     void null_입력시_false를_반환한다() {
         InputValidator validator = new InputValidator();
