@@ -10,4 +10,9 @@ public class DelimiterExtractor {
         int delimiterEndIndex = input.indexOf("\n");
         return input.substring(2, delimiterEndIndex);
     }
+
+    public String extractNumbers(String input) {
+        int delimiterEndIndex = input.indexOf("\n");
+        return input.substring(delimiterEndIndex + 1);
+    }
 }
