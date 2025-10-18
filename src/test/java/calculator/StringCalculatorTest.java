@@ -25,4 +25,10 @@ public class StringCalculatorTest {
         assertThat(calculator.calculate("1,2")).isEqualTo(3L);
         assertThat(calculator.calculate("1,2,3")).isEqualTo(6L);
     }
+
+    @Test
+    void 콜론_구분자로_두_개_이상의_숫자를_더한다() {
+        StringCalculator calculator = new StringCalculator();
+        assertThat(calculator.calculate("1:2:3")).isEqualTo(6L);
+    }
 }
