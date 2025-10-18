@@ -19,4 +19,10 @@ public class DelimiterExtractorTest {
         assertThat(extractor.extractCustomDelimiter("//;\n1;2")).isEqualTo(";");
         assertThat(extractor.extractCustomDelimiter("//|\n1|2")).isEqualTo("|");
     }
+
+    @Test
+    void 커스텀_구분자를_제외한_숫자_부분을_추출한다() {
+        DelimiterExtractor extractor = new DelimiterExtractor();
+        assertThat(extractor.extractNumbers("//;\n1;2;3")).isEqualTo("1;2;3");
+    }
 }
