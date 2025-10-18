@@ -8,7 +8,7 @@ public class StringSplitter {
         return input.split(delimiter);
     }
 
-    public String[] splitByDefaultDelimiters(String input) {
+    public String[] split(String input) {
         return input.split(DEFAULT_DELIMITERS);
     }
 }
