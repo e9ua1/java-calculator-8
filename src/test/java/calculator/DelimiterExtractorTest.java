@@ -12,4 +12,11 @@ public class DelimiterExtractorTest {
         assertThat(extractor.hasCustomDelimiter("//;\n1;2")).isTrue();
         assertThat(extractor.hasCustomDelimiter("1,2")).isFalse();
     }
+
+    @Test
+    void 커스텀_구분자를_추출한다() {
+        DelimiterExtractor extractor = new DelimiterExtractor();
+        assertThat(extractor.extractCustomDelimiter("//;\n1;2")).isEqualTo(";");
+        assertThat(extractor.extractCustomDelimiter("//|\n1|2")).isEqualTo("|");
+    }
 }
