@@ -31,4 +31,10 @@ public class StringCalculatorTest {
         StringCalculator calculator = new StringCalculator();
         assertThat(calculator.calculate("1:2:3")).isEqualTo(6L);
     }
+
+    @Test
+    void 쉼표와_콜론을_혼합하여_사용한다() {
+        StringCalculator calculator = new StringCalculator();
+        assertThat(calculator.calculate("1,2:3")).isEqualTo(6L);
+    }
 }
