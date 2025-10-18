@@ -37,4 +37,10 @@ public class StringCalculatorTest {
         StringCalculator calculator = new StringCalculator();
         assertThat(calculator.calculate("1,2:3")).isEqualTo(6L);
     }
+
+    @Test
+    void 커스텀_구분자를_사용한다() {
+        StringCalculator calculator = new StringCalculator();
+        assertThat(calculator.calculate("//;\n1;2;3")).isEqualTo(6L);
+    }
 }
