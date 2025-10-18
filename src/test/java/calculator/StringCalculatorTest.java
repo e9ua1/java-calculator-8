@@ -12,4 +12,10 @@ public class StringCalculatorTest {
         assertThat(calculator.calculate(null)).isEqualTo(0L);
         assertThat(calculator.calculate("")).isEqualTo(0L);
     }
+
+    @Test
+    void 숫자_하나만_입력시_해당_숫자를_반환한다() {
+        StringCalculator calculator = new StringCalculator();
+        assertThat(calculator.calculate("1")).isEqualTo(1L);
+    }
 }
