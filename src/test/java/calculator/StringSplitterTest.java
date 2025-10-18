@@ -16,7 +16,7 @@ public class StringSplitterTest {
     @Test
     void 기본_구분자로_문자열을_분리한다() {
         StringSplitter splitter = new StringSplitter();
-        String[] result = splitter.splitByDefualtDelimiters("1,2:3");
+        String[] result = splitter.splitByDefaultDelimiters("1,2:3");
         assertThat(result).containsExactly("1", "2", "3");
     }
 }
