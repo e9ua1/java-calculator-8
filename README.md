@@ -36,32 +36,29 @@
 
 ## 기능 목록
 
-### 1. Adder (순수 계산)
+### 1. Number (숫자 도메인 객체)
 
-- [x] 빈 배열 입력 시 0 반환
-- [x] 정수 배열의 합 계산
-- [x] BigInteger를 이용한 큰 숫자 합 계산
-
-### 2. NumberConverter (문자열→숫자 변환)
-
-- [x] 문자열을 BigInteger로 변환
+- [x] 문자열을 BigInteger로 파싱
 - [x] 앞뒤 공백 제거 후 변환
 - [x] 매우 큰 숫자 변환 지원
+- [x] 생성 시점에 음수 검증 (불변 객체)
 - [x] 숫자가 아닌 문자열 입력 시 IllegalArgumentException 발생
 
-### 3. NumberValidator (숫자 검증)
+### 2. Numbers (일급 컬렉션)
 
-- [x] 음수 입력 시 IllegalArgumentException 발생
-- [x] 양수 및 0 검증 통과
-- [x] BigInteger 검증 지원
+- [x] Number 리스트를 내부 상태로 보유
+- [x] 빈 배열 입력 시 0 반환
+- [x] sum() 메서드로 숫자들의 합 계산
+- [x] BigInteger를 이용한 큰 숫자 합 계산
+- [x] 생성 시점에 모든 Number 검증 완료
 
-### 4. StringSplitter (문자열 분리)
+### 3. StringSplitter (문자열 분리)
 
 - [x] 단일 구분자로 문자열 분리
 - [x] 쉼표(,)와 콜론(:)을 기본 구분자로 사용하여 분리
 - [x] 정규식을 활용한 복합 구분자 처리
 
-### 5. DelimiterExtractor (구분자 추출)
+### 4. DelimiterExtractor (구분자 추출)
 
 - [x] 문자열이 "//"로 시작하는지 확인 (커스텀 구분자 여부)
 - [x] "//"와 "\n" 사이의 문자를 커스텀 구분자로 추출
@@ -69,48 +66,53 @@
 - [x] 이스케이프된 개행문자(\\n) 처리 지원
 - [x] 매직 넘버 상수화로 가독성 향상
 
-### 6. DelimiterParser (전략 패턴 적용)
+### 5. DelimiterParser (전략 패턴 적용)
 
 - [x] DelimiterParser 인터페이스 정의
 - [x] CustomDelimiterParser: 커스텀 구분자 처리
-- [x] DefaultDelimiterParser: 기본 구분자(쉼표, 콜론) 처리
+- [x] DefaultDelimiterParser: 기본 구분자(쉼표, 콜론) 처리 및 상수화
 - [x] SingleNumberParser: 단일 숫자 처리
 - [x] 책임 연쇄 패턴으로 파서 선택
 
-### 7. StringCalculator (전체 조합)
+### 6. InputParser (파싱 책임 분리)
+
+- [x] DelimiterParser들의 조합 로직 캡슐화
+- [x] 입력 형식 예외를 Parser 레이어에서 처리
+- [x] StringCalculator에서 파싱 책임 분리
+
+### 7. StringCalculator (계산 흐름 조율)
 
 - [x] null 또는 빈 문자열 입력 시 0 반환
-- [x] 숫자 하나만 입력 시 해당 숫자 반환
-- [x] 쉼표 구분자로 두 개 이상의 숫자 합 계산 (예: "1,2" → 3)
-- [x] 콜론 구분자로 두 개 이상의 숫자 합 계산 (예: "1:2:3" → 6)
-- [x] 쉼표와 콜론 혼합 사용 (예: "1,2:3" → 6)
-- [x] 커스텀 구분자 사용 (예: "//;\n1;2;3" → 6)
-- [x] 이스케이프된 개행문자로 커스텀 구분자 사용 (예: "//;\\n1;2;3" → 6)
-- [x] 매우 큰 숫자 계산 지원
-- [x] 음수 입력 시 IllegalArgumentException 발생
-- [x] 잘못된 형식 입력 시 IllegalArgumentException 발생
-- [x] 의존성 주입을 통한 테스트 용이성 확보
+- [x] InputParser로 파싱 책임 위임
+- [x] Numbers로 변환 및 계산 책임 위임
+- [x] 계산 흐름 조율만 담당 (간소화)
 
-### 8. Application (입출력)
+### 8. CalculatorFactory (객체 조립)
+
+- [x] 모든 객체 생성 및 조립 책임 담당
+- [x] 팩토리 패턴으로 복잡도 캡슐화
+
+### 9. Application (입출력)
 
 - [x] "덧셈할 문자열을 입력해 주세요." 출력
 - [x] 사용자로부터 문자열 입력 받기 (Console.readLine() 사용)
 - [x] 계산 결과를 "결과 : {숫자}" 형식으로 출력
 - [x] 예외 발생 시 IllegalArgumentException을 그대로 전파하여 프로그램 종료
-- [x] createCalculator() 팩토리 메서드로 객체 생성 책임 분리
+- [x] 입출력만 담당 (객체 조립은 Factory로 분리)
 
-## 클래스 설계
+## 클래스 구조
 
 ```
 calculator/
-├── Application.java                     # 메인 실행, 입출력, 객체 조립 담당
-├── StringCalculator.java                # 전체 계산 흐름 조합 (의존성 주입)
+├── Application.java                     # 입출력만 담당
+├── CalculatorFactory.java               # 객체 생성 및 조립 담당
+├── StringCalculator.java                # 계산 흐름 조율 (간소화)
+├── Number.java                          # 숫자 도메인 (파싱+검증 통합)
+├── Numbers.java                         # 숫자 컬렉션 (상태+계산)
 ├── DelimiterExtractor.java              # 구분자 추출 책임
 ├── StringSplitter.java                  # 문자열 분리 책임
-├── NumberConverter.java                 # 문자열→BigInteger 변환 책임
-├── NumberValidator.java                 # 숫자 검증 책임
-├── Adder.java                           # 순수 덧셈 계산 책임
 └── parser/
+    ├── InputParser.java                 # 파싱 책임 담당
     ├── DelimiterParser.java             # 파싱 전략 인터페이스
     ├── CustomDelimiterParser.java       # 커스텀 구분자 파싱 전략
     ├── DefaultDelimiterParser.java      # 기본 구분자 파싱 전략
@@ -122,10 +124,12 @@ calculator/
 ### 단일 책임 원칙 (SRP)
 
 - 각 클래스는 하나의 책임만 가짐
-- NumberValidator: 숫자 검증만
-- DelimiterExtractor: 구분자 추출만
-- Adder: 덧셈 계산만
-- Application: 객체 조립 및 입출력만
+- Number: 숫자 파싱과 검증
+- Numbers: 숫자 컬렉션 관리 및 계산
+- InputParser: 파싱 로직 조합
+- StringCalculator: 계산 흐름 조율
+- CalculatorFactory: 객체 조립
+- Application: 입출력
 
 ### 개방-폐쇄 원칙 (OCP)
 
@@ -135,35 +139,27 @@ calculator/
 
 ### 의존성 역전 원칙 (DIP)
 
-- StringCalculator는 구체적인 구현이 아닌 DelimiterParser 인터페이스에 의존
+- StringCalculator는 구체적인 구현이 아닌 InputParser에 의존
+- InputParser는 DelimiterParser 인터페이스에 의존
 - 생성자 주입을 통한 의존성 주입
 - 테스트 용이성 및 유연성 확보
+
+### 일급 컬렉션 패턴
+
+- Numbers 클래스로 숫자 배열을 래핑
+- 상태와 행위를 함께 가지는 객체
+- 불변 객체로 안전성 확보
+
+### 도메인 객체의 자가 검증
+
+- Number 객체가 생성 시점에 스스로 검증
+- 항상 유효한 상태 보장
+- 외부 Validator 불필요
 
 ### 낮은 결합도, 높은 응집도
 
 - 인터페이스 활용으로 낮은 결합도 달성
 - 각 클래스는 자신의 책임에 집중하여 높은 응집도 유지
-
-## 커밋 전략
-
-각 기능 단위로 테스트 작성 → 구현 → 커밋 (TDD 사이클)
-
-```
-1. docs: 프로젝트 개요 및 기능 목록 작성
-2. test: Adder 빈 배열 0 반환 테스트 추가
-3. feat: Adder 빈 배열 0 반환 구현
-4. test: Adder 정수 배열 합 계산 테스트 추가
-5. feat: Adder 정수 배열 합 계산 구현
-6. test: NumberConverter 문자열 정수 변환 테스트 추가
-7. feat: NumberConverter 문자열 정수 변환 구현
-8. refactor: DelimiterExtractor 매직 넘버 상수화
-9. refactor: Calculator를 Adder로 이름 변경
-10. refactor: InputValidator를 NumberValidator로 이름 변경
-11. feat: DelimiterParser 인터페이스 및 구현체 추가
-12. refactor: StringCalculator에 의존성 주입 적용
-13. refactor: Application에 객체 생성 팩토리 메서드 추가
-...
-```
 
 ## 테스트 실행
 
