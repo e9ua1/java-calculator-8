@@ -1,5 +1,7 @@
 package calculator;
 
+import java.math.BigInteger;
+
 public class StringCalculator {
 
     private final InputValidator validator;
@@ -16,13 +18,13 @@ public class StringCalculator {
         this.calculator = new Calculator();
     }
 
-    public long calculate(String input) {
+    public BigInteger calculate(String input) {
         if (!validator.isValid(input) || input.isEmpty()) {
-            return 0L;
+            return BigInteger.ZERO;
         }
 
         String[] numberStrings = splitInput(input);
-        long[] numbers = convertToNumbers(numberStrings);
+        BigInteger[] numbers = convertToNumbers(numberStrings);
         validateNumbers(numbers);
         return calculator.sum(numbers);
     }
@@ -41,16 +43,16 @@ public class StringCalculator {
         return stringSplitter.split(input);
     }
 
-    private long[] convertToNumbers(String[] numberStrings) {
-        long[] numbers = new long[numberStrings.length];
+    private BigInteger[] convertToNumbers(String[] numberStrings) {
+        BigInteger[] numbers = new BigInteger[numberStrings.length];
         for (int i = 0; i < numberStrings.length; i++) {
             numbers[i] = numberConverter.convert(numberStrings[i]);
         }
         return numbers;
     }
 
-    private void validateNumbers(long[] numbers) {
-        for (long number : numbers) {
+    private void validateNumbers(BigInteger[] numbers) {
+        for (BigInteger number : numbers) {
             validator.validateNumber(number);
         }
     }
