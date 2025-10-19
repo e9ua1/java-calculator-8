@@ -1,15 +1,12 @@
-package calculator;
+package calculator.parser;
 
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import calculator.parser.CustomDelimiterParser;
-import calculator.parser.DefaultDelimiterParser;
-import calculator.parser.DelimiterParser;
-import calculator.parser.InputParser;
-import calculator.parser.SingleNumberParser;
+import calculator.DelimiterExtractor;
+import calculator.StringSplitter;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
