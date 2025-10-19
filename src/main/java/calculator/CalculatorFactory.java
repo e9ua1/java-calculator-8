@@ -1,2 +1,26 @@
-package calculator;public class CalculatorFactory {
+package calculator;
+
+import java.util.List;
+
+import calculator.parser.CustomDelimiterParser;
+import calculator.parser.DefaultDelimiterParser;
+import calculator.parser.DelimiterParser;
+import calculator.parser.InputParser;
+import calculator.parser.SingleNumberParser;
+
+public class CalculatorFactory {
+
+    public StringCalculator createCalculator() {
+        DelimiterExtractor extractor = new DelimiterExtractor();
+        StringSplitter splitter = new StringSplitter();
+
+        List<DelimiterParser> parsers = List.of(
+                new CustomDelimiterParser(extractor, splitter),
+                new DefaultDelimiterParser(splitter),
+                new SingleNumberParser()
+        );
+
+        InputParser parser = new InputParser(parsers);
+        return new StringCalculator(parser);
+    }
 }
