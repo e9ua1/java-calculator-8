@@ -70,7 +70,7 @@
 
 - [x] DelimiterParser 인터페이스 정의
 - [x] CustomDelimiterParser: 커스텀 구분자 처리
-- [x] DefaultDelimiterParser: 기본 구분자(쉼표, 콜론) 처리 및 상수화
+- [x] DefaultDelimiterParser: 기본 구분자 처리 및 상수화
 - [x] SingleNumberParser: 단일 숫자 처리
 - [x] 책임 연쇄 패턴으로 파서 선택
 
@@ -85,7 +85,7 @@
 - [x] null 또는 빈 문자열 입력 시 0 반환
 - [x] InputParser로 파싱 책임 위임
 - [x] Numbers로 변환 및 계산 책임 위임
-- [x] 계산 흐름 조율만 담당 (간소화)
+- [x] 계산 흐름 조율만 담당
 
 ### 8. CalculatorFactory (객체 조립)
 
@@ -104,19 +104,19 @@
 
 ```
 calculator/
-├── Application.java                     # 입출력만 담당
-├── CalculatorFactory.java               # 객체 생성 및 조립 담당
-├── StringCalculator.java                # 계산 흐름 조율 (간소화)
-├── Number.java                          # 숫자 도메인 (파싱+검증 통합)
-├── Numbers.java                         # 숫자 컬렉션 (상태+계산)
-├── DelimiterExtractor.java              # 구분자 추출 책임
-├── StringSplitter.java                  # 문자열 분리 책임
+├── Application.java                     # 입출력 담당
+├── CalculatorFactory.java               # 객체 생성 및 조립
+├── StringCalculator.java                # 계산 흐름 조율
+├── Number.java                          # 숫자 도메인 (파싱과 검증)
+├── Numbers.java                         # 숫자 컬렉션 (상태와 계산)
+├── DelimiterExtractor.java              # 구분자 추출
+├── StringSplitter.java                  # 문자열 분리
 └── parser/
-    ├── InputParser.java                 # 파싱 책임 담당
+    ├── InputParser.java                 # 파싱 책임
     ├── DelimiterParser.java             # 파싱 전략 인터페이스
-    ├── CustomDelimiterParser.java       # 커스텀 구분자 파싱 전략
-    ├── DefaultDelimiterParser.java      # 기본 구분자 파싱 전략
-    └── SingleNumberParser.java          # 단일 숫자 파싱 전략
+    ├── CustomDelimiterParser.java       # 커스텀 구분자 파싱
+    ├── DefaultDelimiterParser.java      # 기본 구분자 파싱
+    └── SingleNumberParser.java          # 단일 숫자 파싱
 ```
 
 ## 객체지향 설계 원칙
