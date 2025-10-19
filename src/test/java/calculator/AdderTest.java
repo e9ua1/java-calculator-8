@@ -9,14 +9,14 @@ class CalculatorTest {
 
     @Test
     void 빈_배열은_0을_반환한다() {
-        Calculator calculator = new Calculator();
+        Adder calculator = new Adder();
         BigInteger result = calculator.sum(new BigInteger[]{});
         assertThat(result).isEqualTo(BigInteger.ZERO);
     }
 
     @Test
     void 정수_배열의_합을_계산한다() {
-        Calculator calculator = new Calculator();
+        Adder calculator = new Adder();
         BigInteger result = calculator.sum(new BigInteger[]{
                 BigInteger.valueOf(1),
                 BigInteger.valueOf(2),
@@ -27,7 +27,7 @@ class CalculatorTest {
 
     @Test
     void 큰_숫자의_합을_계산한다() {
-        Calculator calculator = new Calculator();
+        Adder calculator = new Adder();
         BigInteger result = calculator.sum(new BigInteger[]{
                 new BigInteger("999999999999999999"),
                 new BigInteger("999999999999999999")

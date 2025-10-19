@@ -2,13 +2,18 @@ package calculator;
 
 public class DelimiterExtractor {
 
+    private static final String CUSTOM_DELIMITER_PREFIX = "//";
+    private static final int CUSTOM_DELIMITER_START_INDEX = 2;
+    private static final int REAL_NEWLINE_LENGTH = 1;
+    private static final int ESCAPED_NEWLINE_LENGTH = 2;
+
     public boolean hasCustomDelimiter(String input) {
-        return input.startsWith("//");
+        return input.startsWith(CUSTOM_DELIMITER_PREFIX);
     }
 
     public String extractCustomDelimiter(String input) {
         int delimiterEndIndex = findDelimiterEndIndex(input);
-        return input.substring(2, delimiterEndIndex);
+        return input.substring(CUSTOM_DELIMITER_START_INDEX, delimiterEndIndex);
     }
 
     public String extractNumbers(String input) {
@@ -27,8 +32,8 @@ public class DelimiterExtractor {
 
     private int getNewlineLength(String input, int index) {
         if (index + 1 < input.length() && input.charAt(index) == '\\') {
-            return 2;
+            return ESCAPED_NEWLINE_LENGTH;
         }
-        return 1;
+        return REAL_NEWLINE_LENGTH;
     }
 }
