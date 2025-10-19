@@ -1,11 +1,12 @@
 package calculator;
 
 import java.math.BigInteger;
+
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class CalculatorTest {
+class AdderTest {
 
     @Test
     void 빈_배열은_0을_반환한다() {

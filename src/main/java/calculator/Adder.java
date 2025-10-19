@@ -2,7 +2,7 @@ package calculator;
 
 import java.math.BigInteger;
 
-public class Calculator {
+public class Adder {
 
     public BigInteger sum(BigInteger[] numbers) {
         BigInteger total = BigInteger.ZERO;
