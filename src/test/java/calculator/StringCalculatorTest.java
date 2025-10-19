@@ -9,8 +9,8 @@ import org.junit.jupiter.api.Test;
 import calculator.parser.CustomDelimiterParser;
 import calculator.parser.DefaultDelimiterParser;
 import calculator.parser.DelimiterParser;
+import calculator.parser.FallbackParser;
 import calculator.parser.InputParser;
-import calculator.parser.SingleNumberParser;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -27,7 +27,7 @@ public class StringCalculatorTest {
         List<DelimiterParser> parsers = List.of(
                 new CustomDelimiterParser(extractor, splitter),
                 new DefaultDelimiterParser(splitter),
-                new SingleNumberParser()
+                new FallbackParser()
         );
 
         InputParser parser = new InputParser(parsers);

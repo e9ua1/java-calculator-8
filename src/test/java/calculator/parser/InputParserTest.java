@@ -22,7 +22,7 @@ public class InputParserTest {
         List<DelimiterParser> parsers = List.of(
                 new CustomDelimiterParser(extractor, splitter),
                 new DefaultDelimiterParser(splitter),
-                new SingleNumberParser()
+                new FallbackParser()
         );
 
         parser = new InputParser(parsers);

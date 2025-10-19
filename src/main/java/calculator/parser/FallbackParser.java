@@ -1,6 +1,6 @@
 package calculator.parser;
 
-public class SingleNumberParser implements DelimiterParser {
+public class FallbackParser implements DelimiterParser {
 
     @Override
     public boolean supports(String input) {

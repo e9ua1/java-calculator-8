@@ -6,7 +6,7 @@ import calculator.parser.CustomDelimiterParser;
 import calculator.parser.DefaultDelimiterParser;
 import calculator.parser.DelimiterParser;
 import calculator.parser.InputParser;
-import calculator.parser.SingleNumberParser;
+import calculator.parser.FallbackParser;
 
 public class CalculatorFactory {
 
@@ -17,7 +17,7 @@ public class CalculatorFactory {
         List<DelimiterParser> parsers = List.of(
                 new CustomDelimiterParser(extractor, splitter),
                 new DefaultDelimiterParser(splitter),
-                new SingleNumberParser()
+                new FallbackParser()
         );
 
         InputParser parser = new InputParser(parsers);
