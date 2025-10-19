@@ -4,6 +4,9 @@ import calculator.StringSplitter;
 
 public class DefaultDelimiterParser implements DelimiterParser {
 
+    private static final String COMMA = ",";
+    private static final String COLON = ":";
+
     private final StringSplitter splitter;
 
     public DefaultDelimiterParser(StringSplitter splitter) {
@@ -12,7 +15,7 @@ public class DefaultDelimiterParser implements DelimiterParser {
 
     @Override
     public boolean supports(String input) {
-        return input.contains(",") || input.contains(":");
+        return input.contains(COMMA) || input.contains(COLON);
     }
 
     @Override
