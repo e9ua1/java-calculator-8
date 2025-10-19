@@ -15,7 +15,7 @@ public class InputParser {
                 .filter(parser -> parser.supports(input))
                 .findFirst()
                 .map(parser -> parser.parse(input))
+                // FallbackParser에 의해 항상 처리되지만, 체인 구성 변경 시를 대비한 방어 코드
                 .orElseThrow(() -> new IllegalArgumentException("입력 형식이 올바르지 않습니다"));
     }
-
 }
